@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { useState } from "react";
+import beltudLogo from "@/assets/beltud-logo.png";
 
 export const Navigation = () => {
   const [language, setLanguage] = useState<"nl" | "fr">("nl");
@@ -21,17 +22,14 @@ export const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-primary rounded flex items-center justify-center text-primary-foreground font-bold text-xl">
-              B
-            </div>
+          <a href="#" className="flex items-center space-x-3">
+            <img src={beltudLogo} alt="Beltud Logo" className="h-12 w-auto" />
             <div className="hidden md:block">
-              <div className="font-bold text-lg text-foreground">BELTUD</div>
               <div className="text-xs text-muted-foreground">
-                {language === "nl" ? "Belgisch-Turkse Vriendschap" : "Amitié Belgo-Turque"}
+                {language === "nl" ? "Vereniging voor Belgisch-Turkse Vriendschap" : "Association pour l'Amitié Belgo-Turque"}
               </div>
             </div>
-          </div>
+          </a>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">

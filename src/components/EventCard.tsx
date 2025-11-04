@@ -58,7 +58,7 @@ export const EventCard = ({ title, startDate, endDate, location, price, image, d
       
       <CardFooter className="p-6 pt-0">
         <Button variant="default" className="w-full">
-          Meer info
+          Vervolg
         </Button>
       </CardFooter>
     </Card>

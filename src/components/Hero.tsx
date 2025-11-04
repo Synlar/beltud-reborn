@@ -71,7 +71,7 @@ export const Hero = () => {
                 size="lg" 
                 className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg animate-in fade-in slide-in-from-left-4 duration-1000"
               >
-                En savoir plus
+                Meer informatie
               </Button>
             </div>
           </div>

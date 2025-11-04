@@ -37,7 +37,7 @@ export const NewsCard = ({ title, excerpt, image, date }: NewsCardProps) => {
       
       <CardFooter className="p-6 pt-0">
         <Button variant="outline" className="w-full">
-          Lees meer
+          Vervolg
         </Button>
       </CardFooter>
     </Card>

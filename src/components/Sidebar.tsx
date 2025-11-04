@@ -29,7 +29,7 @@ export const Sidebar = () => {
             className="w-full bg-white text-primary hover:bg-white/90 font-semibold"
             size="lg"
           >
-            Registreer nu
+            Lid worden
           </Button>
         </CardContent>
       </Card>
