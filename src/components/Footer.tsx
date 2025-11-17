@@ -1,4 +1,5 @@
 import { Facebook, Twitter, Instagram, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
   return (
@@ -36,11 +37,11 @@ export const Footer = () => {
           <div>
             <h3 className="font-bold text-foreground mb-4 text-lg">Snelle links</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#beltud" className="hover:text-primary transition-colors">Over Beltud</a></li>
-              <li><a href="#lidmaatschap" className="hover:text-primary transition-colors">Lidmaatschap</a></li>
-              <li><a href="#activiteiten" className="hover:text-primary transition-colors">Activiteiten</a></li>
-              <li><a href="#projecten" className="hover:text-primary transition-colors">Projecten</a></li>
-              <li><a href="#cursussen" className="hover:text-primary transition-colors">Cursussen</a></li>
+              <li><Link to="/over-beltud" className="hover:text-primary transition-colors">Over Beltud</Link></li>
+              <li><Link to="/lidmaatschap" className="hover:text-primary transition-colors">Lidmaatschap</Link></li>
+              <li><Link to="/#activiteiten" className="hover:text-primary transition-colors">Activiteiten</Link></li>
+              <li><Link to="/#agenda" className="hover:text-primary transition-colors">Agenda</Link></li>
+              <li><Link to="/cursussen/cursus-turks" className="hover:text-primary transition-colors">Cursussen</Link></li>
             </ul>
           </div>
 
@@ -48,10 +49,10 @@ export const Footer = () => {
           <div>
             <h3 className="font-bold text-foreground mb-4 text-lg">Projecten</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#50-jaar" className="hover:text-primary transition-colors">50 Jaar in België</a></li>
-              <li><a href="#brusselse-cultuurdag" className="hover:text-primary transition-colors">Brusselse Cultuurdag</a></li>
-              <li><a href="#kleuren-van-belgie" className="hover:text-primary transition-colors">De Kleuren van België</a></li>
-              <li><a href="#vriendschappelijke-wedstrijd" className="hover:text-primary transition-colors">Vriendschappelijke wedstrijd</a></li>
+              <li><Link to="/projecten/50-jaar-hand-in-hand" className="hover:text-primary transition-colors">50 Jaar in België</Link></li>
+              <li><Link to="/projecten/brusselse-cultuurdagen" className="hover:text-primary transition-colors">Brusselse Cultuurdag</Link></li>
+              <li><Link to="/projecten/kleuren-van-belgie" className="hover:text-primary transition-colors">De Kleuren van België</Link></li>
+              <li><Link to="/projecten/vriendschappelijke-wedstrijd" className="hover:text-primary transition-colors">Vriendschappelijke wedstrijd</Link></li>
             </ul>
           </div>
 
