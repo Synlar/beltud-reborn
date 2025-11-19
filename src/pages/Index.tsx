@@ -4,54 +4,59 @@ import { EventCard } from "@/components/EventCard";
 import { NewsCard } from "@/components/NewsCard";
 import { Sidebar } from "@/components/Sidebar";
 import { Footer } from "@/components/Footer";
+import { useLanguage } from "@/context/language-context";
+import { translations } from "@/translations";
 
 const Index = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const events = [
     {
-      title: "Nouvelle classe de turc pour débutants",
+      title: t.events.event1.title,
       startDate: "wo. 17 Jan 2018",
       endDate: "wo. 28 Mar 2018",
-      location: "Rue des Palais, 27, Schaerbeek, 1030 Belgium",
+      location: t.events.event1.location,
       price: "€ 100",
       image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&h=300&fit=crop",
-      description: "Leer Turks in een gezellige en interactieve omgeving met ervaren docenten."
+      description: t.events.event1.description
     },
     {
-      title: "Atelier de calligraphie ottomane",
+      title: t.events.event2.title,
       startDate: "za. 10 Feb 2018",
       endDate: "za. 24 Feb 2018",
-      location: "Rue du Progrès, 323, Brussel, 1030 Belgium",
+      location: t.events.event2.location,
       price: "€ 75",
       image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&h=300&fit=crop",
-      description: "Ontdek de kunst van de Ottomaanse kalligrafie met meester Mehmet."
+      description: t.events.event2.description
     },
     {
-      title: "Concert de musique traditionnelle",
+      title: t.events.event3.title,
       startDate: "vr. 2 Mar 2018",
       endDate: "vr. 2 Mar 2018",
-      location: "Bozar, Brussel",
+      location: t.events.event3.location,
       price: "€ 25",
       image: "https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=400&h=300&fit=crop",
-      description: "Een avond vol traditionele Turkse muziek met authentieke instrumenten."
+      description: t.events.event3.description
     }
   ];
 
   const news = [
     {
-      title: "Une soirée conviviale autour du café turc chez Beltud",
-      excerpt: "Un agréable moment de convivialité autour du café turc chez Beltud. Près de 80 personnes étaient présentes au rendez-vous lors du « Turkish Coffee Meeting ». L'occasion de découvrir le café turc, sa place dans le patrimoine turc...",
+      title: t.news.news1.title,
+      excerpt: t.news.news1.excerpt,
       image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=300&fit=crop",
       date: "15 Jan 2018"
     },
     {
-      title: "Exposition d'art contemporain E/IM-MIGRATION",
-      excerpt: "Découvrez notre nouvelle exposition mettant en lumière les artistes contemporains turcs et belges explorant les thèmes de la migration et de l'identité culturelle à travers des œuvres puissantes et émouvantes.",
+      title: t.news.news2.title,
+      excerpt: t.news.news2.excerpt,
       image: "https://images.unsplash.com/photo-1577083552431-6e5fd01988ec?w=400&h=300&fit=crop",
       date: "8 Jan 2018"
     },
     {
-      title: "Succès du festival gastronomique",
-      excerpt: "Le festival gastronomique belgo-turc a connu un franc succès avec plus de 200 visiteurs. Les participants ont pu déguster des spécialités des deux cultures dans une ambiance festive et conviviale.",
+      title: t.news.news3.title,
+      excerpt: t.news.news3.excerpt,
       image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop",
       date: "20 Dec 2017"
     }
@@ -69,12 +74,12 @@ const Index = () => {
             {/* Agenda Section */}
             <section id="activiteiten">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-3xl font-bold text-foreground">Agenda</h2>
+                <h2 className="text-3xl font-bold text-foreground">{t.sections.agenda}</h2>
                 <a 
                   href="#" 
                   className="text-primary hover:text-primary/80 font-medium text-sm flex items-center"
                 >
-                  Bekijk alle evenementen →
+                  {t.sections.viewAllEvents} →
                 </a>
               </div>
               
@@ -88,13 +93,7 @@ const Index = () => {
             {/* News Section */}
             <section>
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-3xl font-bold text-foreground">News!</h2>
-                <a 
-                  href="#" 
-                  className="text-primary hover:text-primary/80 font-medium text-sm flex items-center"
-                >
-                  Alle nieuws →
-                </a>
+                <h2 className="text-3xl font-bold text-foreground">{t.sections.news}</h2>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
