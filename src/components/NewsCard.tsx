@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { useLanguage } from "@/context/language-context";
+import { translations } from "@/translations";
 
 interface NewsCardProps {
   title: string;
@@ -9,6 +11,9 @@ interface NewsCardProps {
 }
 
 export const NewsCard = ({ title, excerpt, image, date }: NewsCardProps) => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
       <div className="relative h-48 overflow-hidden">
@@ -37,7 +42,7 @@ export const NewsCard = ({ title, excerpt, image, date }: NewsCardProps) => {
       
       <CardFooter className="p-6 pt-0">
         <Button variant="outline" className="w-full">
-          Vervolg
+          {t.newsCard.continue}
         </Button>
       </CardFooter>
     </Card>

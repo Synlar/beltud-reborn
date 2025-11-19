@@ -1,6 +1,8 @@
 import { Calendar, MapPin, Euro } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { useLanguage } from "@/context/language-context";
+import { translations } from "@/translations";
 
 interface EventCardProps {
   title: string;
@@ -13,6 +15,9 @@ interface EventCardProps {
 }
 
 export const EventCard = ({ title, startDate, endDate, location, price, image, description }: EventCardProps) => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300 group">
       <div className="relative h-48 overflow-hidden">
@@ -39,8 +44,8 @@ export const EventCard = ({ title, startDate, endDate, location, price, image, d
           <div className="flex items-start space-x-2 text-muted-foreground">
             <Calendar className="w-4 h-4 mt-0.5 flex-shrink-0" />
             <div>
-              <div>Start: {startDate}</div>
-              <div>Eind: {endDate}</div>
+              <div>{t.eventCard.start}: {startDate}</div>
+              <div>{t.eventCard.end}: {endDate}</div>
             </div>
           </div>
           
@@ -51,14 +56,14 @@ export const EventCard = ({ title, startDate, endDate, location, price, image, d
           
           <div className="flex items-center space-x-2 text-muted-foreground">
             <Euro className="w-4 h-4 flex-shrink-0" />
-            <span>Prijs: {price}</span>
+            <span>{t.eventCard.price}: {price}</span>
           </div>
         </div>
       </CardContent>
       
       <CardFooter className="p-6 pt-0">
         <Button variant="default" className="w-full">
-          Vervolg
+          {t.eventCard.continue}
         </Button>
       </CardFooter>
     </Card>

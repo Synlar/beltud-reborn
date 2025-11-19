@@ -5,9 +5,11 @@ import { useLanguage } from "@/context/language-context";
 import { translations } from "@/translations";
 
 const slideImages = [
-  "https://images.unsplash.com/photo-1577083552431-6e5fd01988ec?w=1200&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=1200&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1200&h=600&fit=crop"
+  "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1200&h=600&fit=crop", // Interculturele ontmoeting
+  "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=1200&h=600&fit=crop", // Concert/performance
+  "https://images.unsplash.com/photo-1577083552431-6e5fd01988ec?w=1200&h=600&fit=crop", // Cultural activities
+  "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&h=600&fit=crop", // Turkish coffee event
+  "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=1200&h=600&fit=crop", // Turkey/Belgium connection
 ];
 
 export const Hero = () => {
@@ -33,6 +35,22 @@ export const Hero = () => {
       subtitle: t.hero.slide3.tag,
       description: t.hero.slide3.subtitle,
       image: slideImages[2]
+    },
+    {
+      title: language === "nl" ? "Turkish Coffee Night" : "Soirée Café Turc",
+      subtitle: language === "nl" ? "EVENEMENT" : "ÉVÉNEMENT",
+      description: language === "nl" 
+        ? "Een gezellige avond rond Turkse koffie en cultuur"
+        : "Une soirée conviviale autour du café turc et de la culture",
+      image: slideImages[3]
+    },
+    {
+      title: language === "nl" ? "Belgisch-Turkse Vriendschap" : "Amitié Belgo-Turque",
+      subtitle: language === "nl" ? "ONZE MISSIE" : "NOTRE MISSION",
+      description: language === "nl"
+        ? "Bruggen bouwen tussen culturen sinds 1985"
+        : "Construire des ponts entre les cultures depuis 1985",
+      image: slideImages[4]
     }
   ];
 
