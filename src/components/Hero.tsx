@@ -1,37 +1,47 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/context/language-context";
+import { translations } from "@/translations";
 
-const slides = [
-  {
-    title: "Exposition d'art contemporain",
-    subtitle: "E/IM-MIGRATION",
-    description: "Découvrez notre exposition d'art contemporain explorant les thèmes de la migration et de l'identité culturelle.",
-    image: "https://images.unsplash.com/photo-1577083552431-6e5fd01988ec?w=1200&h=600&fit=crop"
-  },
-  {
-    title: "Cours de turc pour débutants",
-    subtitle: "Nouvelle classe",
-    description: "Rejoignez nos cours de langue turque pour débutants. Apprenez la langue et la culture dans une ambiance conviviale.",
-    image: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=1200&h=600&fit=crop"
-  },
-  {
-    title: "Café turc traditionnel",
-    subtitle: "Événement culturel",
-    description: "Une soirée conviviale autour du café turc traditionnel. Découvrez l'art de la préparation et de la dégustation.",
-    image: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1200&h=600&fit=crop"
-  }
+const slideImages = [
+  "https://images.unsplash.com/photo-1577083552431-6e5fd01988ec?w=1200&h=600&fit=crop",
+  "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=1200&h=600&fit=crop",
+  "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1200&h=600&fit=crop"
 ];
 
 export const Hero = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = [
+    {
+      title: t.hero.slide1.title,
+      subtitle: t.hero.slide1.tag,
+      description: t.hero.slide1.subtitle,
+      image: slideImages[0]
+    },
+    {
+      title: t.hero.slide2.title,
+      subtitle: t.hero.slide2.tag,
+      description: t.hero.slide2.subtitle,
+      image: slideImages[1]
+    },
+    {
+      title: t.hero.slide3.title,
+      subtitle: t.hero.slide3.tag,
+      description: t.hero.slide3.subtitle,
+      image: slideImages[2]
+    }
+  ];
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [slides.length]);
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
@@ -71,7 +81,7 @@ export const Hero = () => {
                 size="lg" 
                 className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg animate-in fade-in slide-in-from-left-4 duration-1000"
               >
-                Meer informatie
+                {t.hero.moreInfo}
               </Button>
             </div>
           </div>

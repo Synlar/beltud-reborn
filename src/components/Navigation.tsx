@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Menu, ChevronDown, Home } from "lucide-react";
+import { Menu, Home } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import beltudLogo from "@/assets/beltud-logo.png";
@@ -11,36 +11,44 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { useLanguage } from "@/context/language-context";
+import { translations } from "@/translations";
+import { cn } from "@/lib/utils";
 
 export const Navigation = () => {
-  const [language, setLanguage] = useState<"nl" | "fr">("nl");
+  const { language, setLanguage } = useLanguage();
+  const t = translations[language];
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const aboutItems = [
-    { label: "Beltud", href: "/over-beltud" },
-    { label: language === "nl" ? "Lidmaatschap" : "Adhésion", href: "/lidmaatschap" },
-    { label: language === "nl" ? "Gastenboek" : "Livre d'or", href: "#gastenboek" },
+    { label: t.nav.overOnsBeltud, href: "/over-beltud" },
+    { label: t.nav.overOnsMission, href: "/about/mission" },
+    { label: t.nav.overOnsBoard, href: "/about/board" },
+    { label: t.nav.overOnsHistory, href: "/about/history" },
+    { label: t.nav.overOnsLidmaatschap, href: "/lidmaatschap" },
+    { label: t.nav.overOnsGastenboek, href: "#gastenboek" },
   ];
 
   const projectItems = [
-    { label: language === "nl" ? "50 Jaar in België" : "50 ans en Belgique", href: "/projecten/50-jaar-hand-in-hand" },
-    { label: language === "nl" ? "Brusselse Cultuurdag" : "Journées culturelles bruxelloises", href: "/projecten/brusselse-cultuurdagen" },
-    { label: language === "nl" ? "Cartoonconcours" : "Concours de BD", href: "#cartoon-concours" },
-    { label: language === "nl" ? "De Kleuren van België" : "Les couleurs de la Belgique", href: "/projecten/kleuren-van-belgie" },
-    { label: language === "nl" ? "Vriendschappelijke wedstrijd" : "Match amical", href: "/projecten/vriendschappelijke-wedstrijd" },
+    { label: t.nav.projecten50Jaar, href: "/projecten/50-jaar-hand-in-hand" },
+    { label: t.nav.projectenBrusselseCultuurdag, href: "/projecten/brusselse-cultuurdagen" },
+    { label: t.nav.projectenCartoonconcours, href: "#cartoon-concours" },
+    { label: t.nav.projectenKleurenBelgie, href: "/projecten/kleuren-van-belgie" },
+    { label: t.nav.projectenVriendschappelijk, href: "/projecten/vriendschappelijke-wedstrijd" },
   ];
 
   const activityItems = [
-    { label: language === "nl" ? "Interculturele reizen" : "Voyages interculturels", href: "#interculturele-reizen" },
-    { label: language === "nl" ? "De kunst van het samenleven" : "L'art de vivre ensemble", href: "#kunst-samenleven" },
-    { label: language === "nl" ? "Interculturele ontmoetingen" : "Rencontres interculturelles", href: "#interculturele-ontmoetingen" },
-    { label: language === "nl" ? "Concerten & Tentoonstellingen" : "Concerts & Expositions", href: "#concerten-tentoonstellingen" },
+    { label: t.nav.activitiesReizen, href: "#interculturele-reizen" },
+    { label: t.nav.activitiesKunstSamenleven, href: "#kunst-samenleven" },
+    { label: t.nav.activitiesOntmoetingen, href: "#interculturele-ontmoetingen" },
+    { label: t.nav.activitiesConcerten, href: "#concerten-tentoonstellingen" },
   ];
 
   const courseItems = [
-    { label: language === "nl" ? "Turks voor beginners" : "Turc pour débutants", href: "/cursussen/cursus-turks" },
-    { label: language === "nl" ? "Nederlandse taal" : "Langue néerlandaise", href: "#nederlandse-taal" },
-    { label: language === "nl" ? "Kalligrafie workshops" : "Ateliers de calligraphie", href: "#kalligrafie" },
+    { label: t.nav.cursussenTurks, href: "/cursussen/cursus-turks" },
+    { label: t.nav.cursussenNederlands, href: "#nederlandse-taal" },
+    { label: t.nav.cursussenKalligrafie, href: "#kalligrafie" },
+    { label: t.nav.cursussenCultuur, href: "#cultuur-geschiedenis" },
   ];
 
   return (
@@ -69,18 +77,18 @@ export const Navigation = () => {
 
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="text-primary font-medium">
-                    {language === "nl" ? "Over ons" : "À propos"}
+                    {t.nav.overOns}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="w-48 p-2">
+                    <ul className="grid gap-2 p-4 w-[260px]">
                       {aboutItems.map((item) => (
                         <li key={item.href}>
                           <NavigationMenuLink asChild>
                             <Link
                               to={item.href}
-                              className="block px-4 py-2 text-sm text-foreground hover:bg-muted rounded-md transition-colors"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                             >
-                              {item.label}
+                              <div className="text-sm font-medium leading-none">{item.label}</div>
                             </Link>
                           </NavigationMenuLink>
                         </li>
@@ -90,25 +98,19 @@ export const Navigation = () => {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <Link to="/#agenda" className="px-4 py-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors rounded-md hover:bg-muted">
-                    {language === "nl" ? "Dagboek" : "Journal"}
-                  </Link>
-                </NavigationMenuItem>
-
-                <NavigationMenuItem>
                   <NavigationMenuTrigger className="text-primary font-medium">
-                    {language === "nl" ? "Projecten" : "Projets"}
+                    {t.nav.projecten}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="w-64 p-2">
+                    <ul className="grid gap-2 p-4 w-[300px]">
                       {projectItems.map((item) => (
                         <li key={item.href}>
                           <NavigationMenuLink asChild>
                             <Link
                               to={item.href}
-                              className="block px-4 py-2 text-sm text-foreground hover:bg-muted rounded-md transition-colors"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                             >
-                              {item.label}
+                              <div className="text-sm font-medium leading-none">{item.label}</div>
                             </Link>
                           </NavigationMenuLink>
                         </li>
@@ -119,18 +121,18 @@ export const Navigation = () => {
 
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="text-primary font-medium">
-                    {language === "nl" ? "Activiteiten" : "Activités"}
+                    {t.nav.activities}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="w-64 p-2">
+                    <ul className="grid gap-2 p-4 w-[280px]">
                       {activityItems.map((item) => (
                         <li key={item.href}>
                           <NavigationMenuLink asChild>
                             <Link
                               to={item.href}
-                              className="block px-4 py-2 text-sm text-foreground hover:bg-muted rounded-md transition-colors"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                             >
-                              {item.label}
+                              <div className="text-sm font-medium leading-none">{item.label}</div>
                             </Link>
                           </NavigationMenuLink>
                         </li>
@@ -141,18 +143,18 @@ export const Navigation = () => {
 
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="text-primary font-medium">
-                    {language === "nl" ? "Cursussen" : "Cours"}
+                    {t.nav.cursussen}
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="w-56 p-2">
+                    <ul className="grid gap-2 p-4 w-[260px]">
                       {courseItems.map((item) => (
                         <li key={item.href}>
                           <NavigationMenuLink asChild>
                             <Link
                               to={item.href}
-                              className="block px-4 py-2 text-sm text-foreground hover:bg-muted rounded-md transition-colors"
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                             >
-                              {item.label}
+                              <div className="text-sm font-medium leading-none">{item.label}</div>
                             </Link>
                           </NavigationMenuLink>
                         </li>
@@ -162,112 +164,181 @@ export const Navigation = () => {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <Link to="/#multimedia" className="px-4 py-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors rounded-md hover:bg-muted">
-                    Multimedia
+                  <Link 
+                    to="#multimedia" 
+                    className="px-4 py-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors rounded-md hover:bg-muted inline-flex items-center"
+                  >
+                    {t.nav.multimedia}
                   </Link>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <Link to="/contact" className="px-4 py-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors rounded-md hover:bg-muted">
-                    Contact
+                  <Link 
+                    to="/contact" 
+                    className="px-4 py-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors rounded-md hover:bg-muted inline-flex items-center"
+                  >
+                    {t.nav.contact}
                   </Link>
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
-          </div>
 
-          {/* Language Switcher */}
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center bg-muted rounded-lg p-1">
+            {/* Language Switcher */}
+            <div className="flex gap-2 ml-4">
               <button
+                className={cn(
+                  "px-3 py-1 text-sm font-medium rounded-full border transition-colors",
+                  language === "nl" 
+                    ? "bg-primary text-primary-foreground border-primary" 
+                    : "bg-background text-foreground border-border hover:bg-muted"
+                )}
                 onClick={() => setLanguage("nl")}
-                className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
-                  language === "nl"
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
               >
                 NL
               </button>
               <button
+                className={cn(
+                  "px-3 py-1 text-sm font-medium rounded-full border transition-colors",
+                  language === "fr" 
+                    ? "bg-primary text-primary-foreground border-primary" 
+                    : "bg-background text-foreground border-border hover:bg-muted"
+                )}
                 onClick={() => setLanguage("fr")}
-                className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
-                  language === "fr"
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
               >
                 FR
               </button>
             </div>
-
-            {/* Mobile Menu Button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="lg:hidden"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              <Menu className="h-6 w-6" />
-            </Button>
           </div>
+
+          {/* Mobile Menu Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="lg:hidden text-primary"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            <Menu className="h-6 w-6" />
+          </Button>
         </div>
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden py-4 space-y-3">
-            <Link to="/" className="block px-4 py-2 text-sm font-medium text-primary hover:bg-muted rounded-md" onClick={() => setMobileMenuOpen(false)}>
-              <Home className="w-4 h-4 inline mr-2" />
-              {language === "nl" ? "Home" : "Accueil"}
-            </Link>
-            
-            <div>
-              <div className="px-4 py-2 text-sm font-bold text-foreground">{language === "nl" ? "Over ons" : "À propos"}</div>
-              {aboutItems.map((item) => (
-                <Link key={item.href} to={item.href} className="block px-8 py-2 text-sm text-muted-foreground hover:bg-muted rounded-md" onClick={() => setMobileMenuOpen(false)}>
-                  {item.label}
-                </Link>
-              ))}
+          <div className="lg:hidden py-4 border-t border-border">
+            <div className="flex flex-col space-y-2">
+              <Link
+                to="/"
+                className="px-4 py-2 text-sm font-medium text-foreground hover:bg-muted rounded-md"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t.nav.home}
+              </Link>
+
+              <div className="px-4 py-2">
+                <div className="text-sm font-semibold text-foreground mb-2">{t.nav.overOns}</div>
+                <div className="pl-4 space-y-1">
+                  {aboutItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      to={item.href}
+                      className="block py-1 text-sm text-muted-foreground hover:text-foreground"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div className="px-4 py-2">
+                <div className="text-sm font-semibold text-foreground mb-2">{t.nav.projecten}</div>
+                <div className="pl-4 space-y-1">
+                  {projectItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      to={item.href}
+                      className="block py-1 text-sm text-muted-foreground hover:text-foreground"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div className="px-4 py-2">
+                <div className="text-sm font-semibold text-foreground mb-2">{t.nav.activities}</div>
+                <div className="pl-4 space-y-1">
+                  {activityItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      to={item.href}
+                      className="block py-1 text-sm text-muted-foreground hover:text-foreground"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div className="px-4 py-2">
+                <div className="text-sm font-semibold text-foreground mb-2">{t.nav.cursussen}</div>
+                <div className="pl-4 space-y-1">
+                  {courseItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      to={item.href}
+                      className="block py-1 text-sm text-muted-foreground hover:text-foreground"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <Link
+                to="#multimedia"
+                className="px-4 py-2 text-sm font-medium text-foreground hover:bg-muted rounded-md"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t.nav.multimedia}
+              </Link>
+
+              <Link
+                to="/contact"
+                className="px-4 py-2 text-sm font-medium text-foreground hover:bg-muted rounded-md"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t.nav.contact}
+              </Link>
+
+              {/* Mobile Language Switcher */}
+              <div className="flex gap-2 px-4 pt-4 border-t border-border">
+                <button
+                  className={cn(
+                    "flex-1 px-3 py-2 text-sm font-medium rounded-md border transition-colors",
+                    language === "nl" 
+                      ? "bg-primary text-primary-foreground border-primary" 
+                      : "bg-background text-foreground border-border"
+                  )}
+                  onClick={() => setLanguage("nl")}
+                >
+                  Nederlands
+                </button>
+                <button
+                  className={cn(
+                    "flex-1 px-3 py-2 text-sm font-medium rounded-md border transition-colors",
+                    language === "fr" 
+                      ? "bg-primary text-primary-foreground border-primary" 
+                      : "bg-background text-foreground border-border"
+                  )}
+                  onClick={() => setLanguage("fr")}
+                >
+                  Français
+                </button>
+              </div>
             </div>
-
-            <Link to="/#agenda" className="block px-4 py-2 text-sm font-medium text-primary hover:bg-muted rounded-md" onClick={() => setMobileMenuOpen(false)}>
-              {language === "nl" ? "Dagboek" : "Journal"}
-            </Link>
-
-            <div>
-              <div className="px-4 py-2 text-sm font-bold text-foreground">{language === "nl" ? "Projecten" : "Projets"}</div>
-              {projectItems.map((item) => (
-                <Link key={item.href} to={item.href} className="block px-8 py-2 text-sm text-muted-foreground hover:bg-muted rounded-md" onClick={() => setMobileMenuOpen(false)}>
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-
-            <div>
-              <div className="px-4 py-2 text-sm font-bold text-foreground">{language === "nl" ? "Activiteiten" : "Activités"}</div>
-              {activityItems.map((item) => (
-                <Link key={item.href} to={item.href} className="block px-8 py-2 text-sm text-muted-foreground hover:bg-muted rounded-md" onClick={() => setMobileMenuOpen(false)}>
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-
-            <div>
-              <div className="px-4 py-2 text-sm font-bold text-foreground">{language === "nl" ? "Cursussen" : "Cours"}</div>
-              {courseItems.map((item) => (
-                <Link key={item.href} to={item.href} className="block px-8 py-2 text-sm text-muted-foreground hover:bg-muted rounded-md" onClick={() => setMobileMenuOpen(false)}>
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-
-            <Link to="/#multimedia" className="block px-4 py-2 text-sm font-medium text-primary hover:bg-muted rounded-md" onClick={() => setMobileMenuOpen(false)}>
-              Multimedia
-            </Link>
-
-            <Link to="/contact" className="block px-4 py-2 text-sm font-medium text-primary hover:bg-muted rounded-md" onClick={() => setMobileMenuOpen(false)}>
-              Contact
-            </Link>
           </div>
         )}
       </div>
